@@ -1,0 +1,4 @@
+%h1.text-xl.font-bold="Conversations For #{current_user.name}"
+- current_user.conversations.each do |conversation|
+  .text-blue-500.underline
+    = link_to "#{conversation.users.pluck(:name).join(', ')}", show_conversation_path(conversation)

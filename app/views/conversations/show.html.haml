@@ -1,0 +1,19 @@
+.w-full.h-16.fixed.top-0
+  %h1.pl-32.pr-24.py-4.font-bold.text-lg= @conversation.users.filter { |user| user != current_user }.map(&:name).join(", ")
+  %hr.border-2
+.mx-4
+  .ml-20.mr-24
+    = turbo_stream_from @conversation, "messages"
+    #messages.h-screen.overflow-y-auto.pt-8.pb-36.flex.flex-col.flex-col-reverse
+      - @messages.each do |message|
+        = render "conversations/message", message: message
+  .w-full.fixed.bottom-16
+    .mx-16#message_form
+      = render partial: "conversations/form", locals: { conversation: @conversation, message: @conversation.messages.new }
+:css
+  #{".msg-#{current_user&.id}"} {
+  justify-content: flex-end
+  }
+  #{".content-#{current_user&.id}"} {
+  background-color: rgb(37 99 235);
+  }

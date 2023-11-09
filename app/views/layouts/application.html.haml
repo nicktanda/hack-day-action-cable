@@ -1,0 +1,7 @@
+%html
+  %head
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+    = stylesheet_link_tag 'application.tailwind.css', "data-turbo-track": "reload"
+  %body.bg-slate-100
+    %main.mb-2
+      = yield

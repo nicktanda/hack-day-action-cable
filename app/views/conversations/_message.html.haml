@@ -1,0 +1,4 @@
+= content_tag :div, id: dom_id(message) do
+  .w-full.my-2
+    .flex{ class: "msg-#{message.user.id}"}
+      %span.bg-blue-900.text-white.px-4.py-2.rounded-full{class: "content-#{message.user.id}"}= message.body

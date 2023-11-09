@@ -1,0 +1,15 @@
+- if flash[:alert].present?
+  .alert.alert-danger
+    = flash[:alert]
+
+= form_with(url: create_session_path, method: :post) do |f|
+  .form-group
+    = f.label :email
+    = f.email_field :email, class: 'form-control'
+
+  .form-group
+    = f.label :password
+    = f.password_field :password, class: 'form-control'
+
+  .form-group
+    = f.submit 'Sign in', class: 'btn btn-primary'

@@ -1,4 +1,4 @@
-# ⏱ hack-day-action-cable
+# ⏱ hack-a-day-a-action-cable-a!
 
 This is a very basic demo repo to showcase how to use turbo streams and broadcasting. An easier way to action cable
 
@@ -77,11 +77,11 @@ What Happens When You Send A Message?
 - If it can save the message, it'll return the turbo stream that appends the new message to the list of messages
 - If it cannot save the message, it errors out
 - The turbo stream appends the message to the div with the id "messages"(`app/views/messages/create.turbo_stream.haml`)
-- The turbo stream also resets the message to be a brand new one(this gives the appearance of resetting the form)
+- The turbo stream also replaces the form partial with a new, giving the appearance of resetting the form
 
 Now this on its own is great, as this allows a user to send a message and it looks like it updates the sent messages(the usual turbo things).
 
-You'll notice however, if you have 2 sessions running side by side(one for Nick and one for Josh), the recipient of the message doesn't get updated like the sender does.
+You'll notice however, if you have 2 sessions running side by side(one for Nick and one for Josh), the recipient of the message doesn't get updated like the sender does. This happens because the user receiving the update is the one sending the message, as the turbo stream is a response to the form submission.
 
 Fear not, there's a fix for this!
 
@@ -113,7 +113,7 @@ One of the standard features of a chat app is that messages are styled different
 And this works fine for when you first open the chat and look at messages you've sent. BUT there's a situation when this doesn't work.
 When you send messages, the styling will look like you received a message when you actually sent the message. This isn't ideal. Any ideas what's happening?
 
-If you guessed that current_user doesn't exist in the turbo stream, you'd almost be right. The turbo stream can see the current user find. THe broadcast can't though. Why? 
+If you guessed that `current_user` doesn't exist in the turbo stream, you'd almost be right. The turbo stream can see the current user fine. The broadcast can't though. Why? 
 Turns out that the broadcast is using similar concepts to action cable under the hood, and broadcasts are session agnostic. This is what's allowing us to send messages to users in real time. It's a DHH special, and there's a few more reasons but I can't find them.
 
 How Do We Get Around It Here?
